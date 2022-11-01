@@ -1,0 +1,73 @@
+syntax = "proto3";
+package mun.claim;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "claim/params.proto";
+// this line is used by starport scaffolding # 1
+
+option go_package = "mun/x/claim/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/mun/claim/params";
+  }
+  // Queries a list of Airdrop items.
+	rpc Airdrop(QueryAirdropRequest) returns (QueryAirdropResponse) {
+		option (google.api.http).get = "/mun/claim/airdrop/{airdrop_id}";
+	}
+
+// Queries a list of Airdrops items.
+	rpc Airdrops(QueryAirdropsRequest) returns (QueryAirdropsResponse) {
+		option (google.api.http).get = "/mun/claim/airdrops";
+	}
+
+// Queries a list of ClaimRecord items.
+	rpc ClaimRecord(QueryClaimRecordRequest) returns (QueryClaimRecordResponse) {
+		option (google.api.http).get = "/mun/claim/airdrops/{airdrop_id}/claim_records/{recipient}";
+	}
+
+// this line is used by starport scaffolding # 2
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAirdropRequest {
+	uint64 airdrop_id = 1;
+}
+
+message QueryAirdropResponse {
+	Airdrop airdrop = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAirdropsRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAirdropsResponse {
+	repeated Airdrop airdrops = 1 [(gogoproto.nullable) = false];
+
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryClaimRecordRequest {
+	uint64 airdrop_id = 1;
+
+	string recipient = 2;
+}
+
+message QueryClaimRecordResponse {
+	ClaimRecord claim_record = 1 [(gogoproto.nullable) = false];
+}
+
+// this line is used by starport scaffolding # 3

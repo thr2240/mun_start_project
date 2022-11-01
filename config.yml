@@ -1,0 +1,42 @@
+accounts:
+  - name: alice
+    mnemonic: "guard cream sadness conduct invite crumble clock pudding hole grit liar hotel maid produce squeeze return argue turtle know drive eight casino maze host"
+    coins: ["200000000tmun", "20000000000550stake"]
+  - name: bob
+    mnemonic: "friend excite rough reopen cover wheel spoon convince island path clean monkey play snow number walnut pull lock shoot hurry dream divide concert discover"
+    coins: ["100000000tmun", "1000880000000stake"]
+validator:
+  name: alice
+  staked: "10000000stake"
+client:
+  openapi:
+    path: "docs/static/openapi.yml"
+  vuex:
+    path: "vue/src/store"
+faucet:
+  name: bob
+  coins: ["50000000tmun", "100000stake"]
+genesis:
+  chain_id: "mun"
+  app_state:
+    claim:
+      airdrops:
+        - id: "1"
+          source_address: "mun1mzgucqnfr2l8cj5apvdpllhzt4zeuh2c2hljyl"
+          conditions:
+            - "CONDITION_TYPE_INIT"
+            - "CONDITION_TYPE_SWAP"
+            - "CONDITION_TYPE_STAKE"
+            - "CONDITION_TYPE_VOTE"
+          start_time: "2022-03-01T00:00:00Z"
+          end_time: "2022-09-21T00:00:00Z"
+      claim_records:
+        - airdrop_id: "1"
+          recipient: "mun1unr06d9xl8c6f32m7qmqx60cwhp6dm2zuaqfzy"
+          initial_claimable_coins:
+            - amount: "250"
+              denom: "stake"
+          claimable_coins:
+            - amount: "1000"
+              denom: "stake"
+          claimed_conditions:

@@ -1,0 +1,19 @@
+syntax = "proto3";
+package mun.claim;
+
+import "gogoproto/gogo.proto";
+import "claim/params.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "mun/x/claim/types";
+
+// GenesisState defines the claim module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  // this line is used by starport scaffolding # genesis/proto/state
+    // airdrops specifies a list of airdrops
+    repeated Airdrop airdrops = 2 [(gogoproto.nullable) = false];
+
+    // claim_records specifies a list of claim records
+    repeated ClaimRecord claim_records = 3 [(gogoproto.nullable) = false];
+}
